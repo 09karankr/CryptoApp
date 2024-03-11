@@ -35,7 +35,7 @@ class WatchListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_watch_list, container, false)
+        return inflater.inflate(R.layout.fragment_watchlist, container, false)
     }
 
     companion object {
