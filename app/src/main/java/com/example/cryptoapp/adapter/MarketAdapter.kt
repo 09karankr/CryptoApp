@@ -10,21 +10,31 @@ import com.bumptech.glide.Glide
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.CurrencyItemLayoutBinding
 import com.example.cryptoapp.fragment.HomeFragmentDirections
+import com.example.cryptoapp.fragment.MarketFragmentDirections
 import com.example.cryptoapp.fragment.models.CryptoCurrency
 
-class MarketAdapter(var context: Context, var list : List<CryptoCurrency> ) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>(){
+class MarketAdapter(var context: Context, var list: List<CryptoCurrency>, var type: String) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>(){
 
     inner class MarketViewHolder(view: View) : RecyclerView.ViewHolder(view){
          var binding = CurrencyItemLayoutBinding.bind(view)
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
       return MarketViewHolder(LayoutInflater.from(context).inflate(R.layout.currency_item_layout,parent,false))
     }
 
+
     override fun getItemCount(): Int {
-       return list.size
+        return list.size
     }
+
+    fun updateData(dataItem : List<CryptoCurrency>){
+        list = dataItem
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: MarketViewHolder, position: Int) {
         val item = list[position]
@@ -42,23 +52,33 @@ class MarketAdapter(var context: Context, var list : List<CryptoCurrency> ) : Re
             .into(holder.binding.currencyChartImageView)
 
         holder.binding.currencyPriceTextView.text =
-        "${String.format("$%.02f",item.quotes[0].price)}"
+            "${String.format("$%.02f", item.quotes[0].price)}"
 
-        if(item.quotes!![0].percentChange24h >0){
+        if (item.quotes!![0].percentChange24h > 0) {
             holder.binding.currencyPriceTextView.setTextColor(context.resources.getColor(R.color.green))
-            holder.binding.currencyPriceTextView.text = "+ ${String.format("%.02f",item.quotes[0].percentChange24h)} %"
+            holder.binding.currencyPriceTextView.text =
+                "+ ${String.format("%.02f", item.quotes[0].percentChange24h)} %"
 
 
-
-        }else{
+        } else {
             holder.binding.currencyPriceTextView.setTextColor(context.resources.getColor(R.color.red))
-            holder.binding.currencyPriceTextView.text = "${String.format("%.02f",item.quotes[0].percentChange24h)} %"
+            holder.binding.currencyPriceTextView.text =
+                "${String.format("%.02f", item.quotes[0].percentChange24h)} %"
         }
 
         holder.itemView.setOnClickListener {
-            findNavController(it).navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item)
-            )
+            if (type == "home") {
+                findNavController(it).navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item)
+                )
+            } else if (type == "market") {
+                findNavController(it).navigate(
+                  MarketFragmentDirections.actionMarketFragmentToDetailsFragment(item)
+                )
+            }
+
         }
     }
 }
+
+

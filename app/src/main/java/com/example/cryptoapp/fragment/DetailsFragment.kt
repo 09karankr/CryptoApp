@@ -118,7 +118,7 @@ class DetailsFragment : Fragment() {
 
         } else {
             binding.detailChangeTextView.setTextColor(requireContext().resources.getColor(R.color.red))
-            binding.detailChangeImageView.setImageResource(me.ibrahimsn.lib.R.drawable.design_ic_visibility_off)
+            binding.detailChangeImageView.setImageResource(R.drawable.ic_caret_down)
             binding.detailChangeTextView.text =
                 "${String.format("%.02f", data.quotes[0].percentChange24h)} %"
         }
