@@ -11,6 +11,7 @@ import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.CurrencyItemLayoutBinding
 import com.example.cryptoapp.fragment.HomeFragmentDirections
 import com.example.cryptoapp.fragment.MarketFragmentDirections
+import com.example.cryptoapp.fragment.WatchListFragmentDirections
 import com.example.cryptoapp.fragment.models.CryptoCurrency
 
 class MarketAdapter(var context: Context, var list: List<CryptoCurrency>, var type: String) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>(){
@@ -74,6 +75,10 @@ class MarketAdapter(var context: Context, var list: List<CryptoCurrency>, var ty
             } else if (type == "market") {
                 findNavController(it).navigate(
                   MarketFragmentDirections.actionMarketFragmentToDetailsFragment(item)
+                )
+            } else {
+                findNavController(it).navigate(
+                    WatchListFragmentDirections.actionWatchListFragmentToDetailsFragment(item)
                 )
             }
 

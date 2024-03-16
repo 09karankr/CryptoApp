@@ -24,12 +24,15 @@
             app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/watchListFragment"
+        android:id="@+id/watchlistFragment"
         android:name="com.example.cryptoapp.fragment.WatchListFragment"
         android:label="fragment_watch_list"
         tools:layout="@layout/fragment_watchlist" >
         <action
             android:id="@+id/action_watchListFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_watchListFragment_to_detailsFragment2"
             app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
